@@ -1,0 +1,87 @@
+
+
+.calendar {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    padding: 0.3%;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+    &__control {
+        height: 10vh;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    &__arrow-prev{
+        margin: 20px;
+        cursor: pointer;
+        display: block;
+        width: 0;
+        height: 0;
+        border: 30px solid transparent;
+        transition: 200ms;
+        border-right: 43px solid rgb(255, 153, 0);
+    }
+    &__arrow-next{
+        margin: 20px;
+        cursor: pointer;
+        display: block;
+        width: 0;
+        height: 0;
+        border: 30px solid transparent;
+        transition: 200ms;
+        border-left: 43px solid rgb(255, 153, 0);
+    }
+    &__month h1{
+        width: 310px;
+        font-size: 45px;
+        text-align: center;
+        user-select: none;
+    }
+    &__grid {
+        height: 90vh;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        column-gap: 0.5%;
+        row-gap: 1%;
+    }
+    &__day-week {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+    }
+    &__day-week h3{
+        font-size: 35px;
+        font-weight: 400;
+        color: black;
+    }
+    &__day-week p{
+        font-size: 20px;
+        font-weight: 400;
+        color: black;
+        margin-left: 5px;
+    }
+    &__today {
+        background-color: deepskyblue;
+    }
+    &__not-this-month h3, &__not-this-month p{
+        color: lightgray;
+    }
+    &__weekend h3, &__weekend p{
+        color: red;
+    }
+}
+
+.calendar__not-this-month.calendar__today {
+    background-color: skyblue;
+}
+
+.calendar__not-this-month.calendar__weekend h3,
+.calendar__not-this-month.calendar__weekend p{
+    color: lightcoral;
+}

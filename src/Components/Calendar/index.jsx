@@ -14,7 +14,7 @@ import { isLastDayOfMonth } from 'date-fns';
 import { isWeekend } from 'date-fns';
 
 import classnames from 'classnames';
-import './Calendar.css'
+import './Calendar.scss'
 
 const WEEK_DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -40,7 +40,7 @@ export default function Calendar() {
   const dayMonthArray = getMonthArray(startDateArray, endDateArray);
   const seqMonth = (action) => {setDataDay(action(dataDay, 1))};
   return (
-    <article className="calendar__container">
+    <article className="calendar">
       <article className="calendar__control">
         <div onClick={()=> seqMonth(subMonths)} className="calendar__arrow-prev"></div>
         <section className="calendar__month"><h1>{format(dataDay, 'MMMM yyyy')}</h1></section>
