@@ -53,7 +53,7 @@ export default function Calendar() {
           })} key={index}><h3>{name}</h3></div>
         )}
         {dayMonthArray.map((day, index) =>
-          <div className={classnames('calendar__day-week', {
+          <div className={classnames('calendar__day-week', 'calendar__data-day',{
             'calendar__today': isToday(day),
             'calendar__not-this-month' : !isSameMonth(day, dataDay),
             'calendar__weekend' : isWeekend(day)

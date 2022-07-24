@@ -1,5 +1,4 @@
 
-
 .calendar {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 100vw;
@@ -54,17 +53,24 @@
         align-items: center;
         justify-content: center;
         user-select: none;
+        & > h3{
+            font-size: 35px;
+            font-weight: 400;
+            color: black;
+        }
+        & > p{
+            font-size: 20px;
+            font-weight: 400;
+            color: black;
+            margin-left: 5px;
+        }
     }
-    &__day-week h3{
-        font-size: 35px;
-        font-weight: 400;
-        color: black;
-    }
-    &__day-week p{
-        font-size: 20px;
-        font-weight: 400;
-        color: black;
-        margin-left: 5px;
+    &__data-day {
+        cursor: pointer;
+        transition: 200ms;
+        &:hover {
+            border: 5px solid dodgerblue;
+        }
     }
     &__today {
         background-color: deepskyblue;
@@ -75,13 +81,11 @@
     &__weekend h3, &__weekend p{
         color: red;
     }
-}
-
-.calendar__not-this-month.calendar__today {
-    background-color: skyblue;
-}
-
-.calendar__not-this-month.calendar__weekend h3,
-.calendar__not-this-month.calendar__weekend p{
+    &__not-this-month.calendar__today {
+        background-color: skyblue;
+    }
+    &__not-this-month.calendar__weekend h3,
+    &__not-this-month.calendar__weekend p{
     color: lightcoral;
+    }
 }
