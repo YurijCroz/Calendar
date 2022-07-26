@@ -1,3 +1,38 @@
+/*Обнуление*/
+*{padding:0;margin:0;border:0;}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+:focus,:active{outline:none;}
+a:focus,a:active{outline:none;}
+nav,footer,header,aside{display:block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display:none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0;}
+a,a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+ul li{list-style:none;}
+img{vertical-align:top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;}
+/*--------------------*/
+
+$maxWidth: 1940;
+@mixin adaptiv-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $maxWidth: $maxWidth - 320;
+    font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
+$backCont: radial-gradient(circle, rgba(86,87,89,1) 0%, rgba(0,0,0,1) 100%);
+$backDay: radial-gradient(circle, rgba(36,38,42,1) 0%, rgba(11,8,8,1) 100%);
+$colorText: white;
+$colorWeekend: red;
+$colorNotWeekday: rgba(211, 211, 211, 0.76);
+$colorNotWeekend: lightcoral;
+$colorTextStroke: black;
+$backToday: radial-gradient(circle, rgba(30,144,255,1) 0%, rgba(0,191,255,1) 100%);
+$backNotToday: radial-gradient(circle, rgba(0,191,255,1) 0%, rgba(135,206,235,1) 100%);
+$hoverBorderColor: dodgerblue;
 
 .calendar {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -6,86 +41,126 @@
     padding: 0.3%;
     display: flex;
     flex-direction: column;
-    background-color: lightgrey;
+    background: $backCont;
+    overflow: hidden;
     &__control {
         height: 10vh;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        @media screen and (max-width: 500px) {
+            height: 7vh;
+        }
+    }
+    &__arrow{
+        margin: 10px;
+        cursor: pointer;
+        display: block;
+        width: 0;
+        height: 0;
+        border: 1.55vw solid transparent;
+        transition: 200ms;
+        @media screen and (max-width: 1940px) {
+            border: 30px solid transparent;
+        }
+        @media screen and (max-width: 1000px) {
+            border: 20px solid transparent;
+        }
     }
     &__arrow-prev{
-        margin: 20px;
-        cursor: pointer;
-        display: block;
-        width: 0;
-        height: 0;
-        border: 30px solid transparent;
-        transition: 200ms;
-        border-right: 43px solid rgb(255, 153, 0);
+        border-right: 2.22vw solid $hoverBorderColor;
+        &:active {
+            transform: translateX(-0.3vw);
+        }
+        @media screen and (max-width: 1940px) {
+            border-right: 43px solid $hoverBorderColor
+        }
+        @media screen and (max-width: 1000px) {
+            border-right: 28.66px solid $hoverBorderColor
+        }
     }
     &__arrow-next{
-        margin: 20px;
-        cursor: pointer;
-        display: block;
-        width: 0;
-        height: 0;
-        border: 30px solid transparent;
-        transition: 200ms;
-        border-left: 43px solid rgb(255, 153, 0);
+        border-left: 2.22vw solid $hoverBorderColor;
+        &:active {
+            transform: translateX(0.3vw);
+        }
+        @media screen and (max-width: 1940px) {
+            border-left: 43px solid $hoverBorderColor
+        }
+        @media screen and (max-width: 1000px) {
+            border-left: 28.66px solid $hoverBorderColor
+        }
     }
     &__month h1{
         width: 310px;
-        font-size: 45px;
+        @include adaptiv-font(45, 20);
         text-align: center;
         user-select: none;
+        color: $colorText;
+        @media screen and (max-width: 500px) {
+            width: 150px;
+        }
     }
     &__grid {
         height: 90vh;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(7, 1fr);
-        column-gap: 0.5%;
-        row-gap: 1%;
+        grid-template-rows: repeat(7, minmax(44px, 1fr));
+        column-gap: 0.5vw;
+        row-gap: 0.5vw;
+        @media screen and (max-width: 500px) {
+            height: 93vh;
+        }
     }
     &__day-week {
-        background-color: white;
+        background: $backDay;
+        border-radius: 0.5vw;
+        min-width: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
         user-select: none;
         & > h3{
-            font-size: 35px;
+            @include adaptiv-font(35, 22);
             font-weight: 400;
-            color: black;
+            color: $colorText;
         }
         & > p{
-            font-size: 20px;
+            @include adaptiv-font(20, 14);
             font-weight: 400;
-            color: black;
             margin-left: 5px;
+            color: $colorText;
+            @media screen and (max-width: 500px) {
+                display: none;
+            }
         }
     }
     &__data-day {
         cursor: pointer;
         transition: 200ms;
         &:hover {
-            border: 5px solid dodgerblue;
+            border: 5px solid $hoverBorderColor;
         }
     }
     &__today {
-        background-color: deepskyblue;
+        background: $backToday;
+        -webkit-text-stroke: 0.5px $colorTextStroke;
     }
-    &__not-this-month h3, &__not-this-month p{
-        color: lightgray;
+    &__not-this-month {
+        flex-direction: column;
+        & > h3, & > p {
+            color: $colorNotWeekday;
+        }
+        &.calendar__weekend h3,
+        &.calendar__weekend p {
+            color: $colorNotWeekend;
+        }
+        &.calendar__today {
+            background: $backNotToday;
+            -webkit-text-stroke: 0px;
+        }
     }
     &__weekend h3, &__weekend p{
-        color: red;
-    }
-    &__not-this-month.calendar__today {
-        background-color: skyblue;
-    }
-    &__not-this-month.calendar__weekend h3,
-    &__not-this-month.calendar__weekend p{
-    color: lightcoral;
+        color: $colorWeekend;
     }
 }

@@ -42,9 +42,9 @@ export default function Calendar() {
   return (
     <article className="calendar">
       <article className="calendar__control">
-        <div onClick={()=> seqMonth(subMonths)} className="calendar__arrow-prev"></div>
+        <div onClick={()=> seqMonth(subMonths)} className="calendar__arrow-prev calendar__arrow"></div>
         <section className="calendar__month"><h1>{format(dataDay, 'MMMM yyyy')}</h1></section>
-        <div onClick={()=> seqMonth(addMonths)} className="calendar__arrow-next"></div>
+        <div onClick={()=> seqMonth(addMonths)} className="calendar__arrow-next calendar__arrow"></div>
       </article>
       <section  className="calendar__grid">
         {WEEK_DAY_NAMES.map((name, index) =>
@@ -58,7 +58,9 @@ export default function Calendar() {
             'calendar__not-this-month' : !isSameMonth(day, dataDay),
             'calendar__weekend' : isWeekend(day)
           })} key={index}><h3>{format(day, "d")}</h3>{
-            (isFirstDayOfMonth(day) || isLastDayOfMonth(day) ? <p>{format(day, "MMMM")}</p>: '')}
+            ((isFirstDayOfMonth(day) || isLastDayOfMonth(day)) && !isSameMonth(day, dataDay)
+            ? <p>{format(day, "MMMM")}</p>: ''
+            )}
           </div>
         )}
       </section>

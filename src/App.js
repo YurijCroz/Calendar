@@ -1,12 +1,12 @@
 import Calendar from './Components/Calendar';
 import './App.css';
 
-function App() {
+import React from 'react'
+
+export default function App() {
   return (
     <>
       <Calendar/>
     </>
-  );
+  )
 }
-
-export default App;
